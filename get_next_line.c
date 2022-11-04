@@ -1,65 +1,38 @@
 #include "get_next_line.h"
 
-char *read_the_line(char *str, int fd)
+char	*read_the_line(char *str, int fd)
 {
-	int buff;
-	char *s1;
-	s1 = malloc(BUFFER_SIZE + 1);
+	int		buff;
+	char	*s1;
 
+	s1 = malloc(BUFFER_SIZE + 1);
 	buff = 1;
-	while (!ft_strchr(str, '\n') && buff)
+	if (!s1)
+		return (0);
+	while (!ft_strchr(str, '\n') && buff != 0)
 	{
 		buff = read(fd, s1, BUFFER_SIZE);
 		if (buff == -1)
 		{
 			free(s1);
-			break ;
+			return (0);
 		}
 		s1[buff] = '\0';
-		str = ft_strjoin(str,s1);
+		str = ft_strjoin(str, s1);
 	}
 	free(s1);
-	return str;
+	return (str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *line;
-	static char *str;
+	char		*line;
+	static char	*str;
 
 	str = read_the_line(str, fd);
+	if (!str)
+		return (0);
 	line = get_line(str);
 	str = next_str(str);
-	return line;
-}
-
-
-int main()
-{
-	int fd = open("test.txt", O_RDONLY);
-	char *str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	return 0;
+	return (line);
 }
