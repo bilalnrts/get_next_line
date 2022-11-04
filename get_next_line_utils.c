@@ -73,3 +73,31 @@ char *get_line(char *str)
 	s1[i] = '\0';
 	return s1;
 }
+
+char *next_str(char *str)
+{
+	int i = 0;
+	int j = 0;
+	int tf = 0;
+	char *s2 = malloc(1);
+	s2[0] = '\0';
+	char *s1 = malloc(ft_strlen(str) + 1);
+	while(str[i])
+	{
+		if (str[i] == '\n')
+		{
+			tf = 1;
+			break;
+		}
+		i++;
+	}
+	if (tf)
+	{
+		while (str[++i])
+			s1[j++] = str[i];
+		s1[j] = 0;
+		free(s2);
+		return s1;
+	}
+	return s2;
+}
