@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_the_line(char *str, int fd)
 {
@@ -27,14 +27,14 @@ char	*read_the_line(char *str, int fd)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*str;
+	static char	*str[100];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return 0;
-	str = read_the_line(str, fd);
-	if (!str)
+	str[fd] = read_the_line(str[fd], fd);
+	if (!str[fd])
 		return (0);
-	line = get_line(str);
-	str = next_str(str);
+	line = get_line(str[fd]);
+	str[fd] = next_str(str[fd]);
 	return (line);
 }
