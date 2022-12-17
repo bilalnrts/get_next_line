@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: binurtas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/17 11:43:28 by binurtas          #+#    #+#             */
+/*   Updated: 2022/12/17 13:00:28 by binurtas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*read_the_line(char *str, int fd)
@@ -27,10 +39,10 @@ char	*read_the_line(char *str, int fd)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*str[100];
+	static char	*str[256];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return 0;
+		return (0);
 	str[fd] = read_the_line(str[fd], fd);
 	if (!str[fd])
 		return (0);

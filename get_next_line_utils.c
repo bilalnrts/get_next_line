@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: binurtas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/17 12:14:59 by binurtas          #+#    #+#             */
+/*   Updated: 2022/12/17 12:40:10 by binurtas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	ft_strchr(char *str, char c)
@@ -13,9 +25,11 @@ char	ft_strchr(char *str, char c)
 	return (0);
 }
 
-int	ft_strlen(char *str) //this function returns lenght of string
+int	ft_strlen(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (!str)
 		return (0);
 	while (str[i])
@@ -24,12 +38,13 @@ int	ft_strlen(char *str) //this function returns lenght of string
 }
 
 char	*ft_strjoin(char *s1, char *s2)
-	//this function concatenates two stirng (s1 && s2) and returns a new string.
 {
-	char *str;
-	int i = 0;
-	int j = 0;
+	char	*str;
+	int		i;
+	int		j;
 
+	i = -1;
+	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(1);
@@ -38,11 +53,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s1 || !s2 || !str)
 		return (0);
-	while (s1[i])
-	{
+	while (s1[++i])
 		str[i] = s1[i];
-		i++;
-	}
 	while (s2[j])
 	{
 		str[i] = s2[j];
@@ -81,25 +93,25 @@ char	*get_line(char *str)
 
 char	*next_str(char *str)
 {
-	int	i;
-	int	j;
-	char *s1;
+	int		i;
+	int		j;
+	char	*s1;
 
 	i = 0;
 	j = 0;
-	while(str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
 	if (!str[i])
 	{
 		free(str);
-		return 0;
+		return (0);
 	}
 	s1 = malloc(ft_strlen(str) - i + 1);
 	if (!s1)
-		return 0;
+		return (0);
 	while (str[++i])
 		s1[j++] = str[i];
 	s1[j] = '\0';
 	free(str);
-	return s1;
+	return (s1);
 }
